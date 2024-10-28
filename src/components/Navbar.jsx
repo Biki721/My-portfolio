@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Github, Linkedin } from "lucide-react";
+import Tooltip from "./Tooltip";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
@@ -44,8 +46,7 @@ const Navbar = () => {
         >
           <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
           <p className="text-white text-[18px] font-bold cursor-pointer flex ">
-            Biki &nbsp;
-            <span className="sm:block hidden">Dey</span>
+            Biki  <span className="sm:block hidden"> Dey</span>
           </p>
         </Link>
 
@@ -63,35 +64,56 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <div className="sm:hidden flex flex-1 justify-end items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="menu"
-            className="w-[28px] h-[28px] object-contain"
-            onClick={() => setToggle(!toggle)}
-          />
+        <div className="flex items-center gap-4">
+          <Tooltip text="GitHub">
+            <a
+              href="https://github.com/Biki721"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="text-white w-6 h-6" />
+            </a>
+          </Tooltip>
+          <Tooltip text="LinkedIn">
+            <a
+              href="https://www.linkedin.com/in/bikidey721/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Linkedin className="text-white w-6 h-6" />
+            </a>
+          </Tooltip>
 
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
-          >
-            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
+          <div className="sm:hidden flex flex-1 justify-end items-center">
+            <img
+              src={toggle ? close : menu}
+              alt="menu"
+              className="w-[28px] h-[28px] object-contain"
+              onClick={() => setToggle(!toggle)}
+            />
+
+            <div
+              className={`${
+                !toggle ? "hidden" : "flex"
+              } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            >
+              <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
+                {navLinks.map((nav) => (
+                  <li
+                    key={nav.id}
+                    className={`font-poppins font-medium cursor-pointer text-[16px] ${
+                      active === nav.title ? "text-white" : "text-secondary"
+                    }`}
+                    onClick={() => {
+                      setToggle(!toggle);
+                      setActive(nav.title);
+                    }}
+                  >
+                    <a href={`#${nav.id}`}>{nav.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
